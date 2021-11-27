@@ -32,7 +32,7 @@ def convert_audio_to_spectrogram(file, file_name):
 
     mel_spectrogram = librosa.feature.melspectrogram(y=samples, sr=sample_rate, n_fft=1024, hop_length=100)
     mel_spectrogram = librosa.power_to_db(mel_spectrogram, ref=np.max)
-    librosa.display.specshow(mel_spect, y_axis='mel', fmax=2 ** 14, x_axis='time')
+    librosa.display.specshow(mel_spectrogram, y_axis='mel', fmax=2 ** 14, x_axis='time')
 
     plt.savefig(spectrogram_path)
     plt.title('Mel Spectrogram')
