@@ -151,3 +151,7 @@ crashlytics-build.properties
 fabric.properties
 
 /Project/Dataset/
+/Project/Ravdess_Dataset/
+/Project/Savee_Dataset/
+/Project/Tess_Dataset/
+

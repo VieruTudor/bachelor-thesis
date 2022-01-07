@@ -1,29 +1,20 @@
 import os
+import sys
 
 import matplotlib.pyplot as plt
 import librosa
 import librosa.display
 import numpy as np
-import pandas
+import gc
+from constants import *
 
 root = os.path.dirname(__file__)
 dataset_path = f'{root}\\Dataset'
 
-'''
-    File structure : 01 - 01 - 03 - 02 - 02 - 01 - 15
-    Modality (01 = full-AV, 02 = video-only, 03 = audio-only).
-    Vocal channel (01 = speech, 02 = song).
-    Emotion (01 = neutral, 02 = calm, 03 = happy, 04 = sad, 05 = angry, 06 = fearful, 07 = disgust, 08 = surprised).
-    Emotional intensity (01 = normal, 02 = strong). NOTE: There is no strong intensity for the 'neutral' emotion.
-    Statement (01 = "Kids are talking by the door", 02 = "Dogs are sitting by the door").
-    Repetition (01 = 1st repetition, 02 = 2nd repetition).
-    Actor (01 to 24. Odd numbered actors are male, even numbered actors are female).
-'''
 
-
+# TODO:  refactor this class
 class FileProcessor:
-    def convert_audio_to_spectrogram(self, file, file_name):
-        spectrogram_path = f'{root}\\Dataset\\Spectrograms\\{file_name}.jpg'
+    def convert_audio_to_spectrogram(self, file, save_path):
 
         samples, sample_rate = librosa.load(file)
         yt, _ = librosa.effects.trim(samples)
@@ -32,38 +23,44 @@ class FileProcessor:
         mel_spectrogram = librosa.power_to_db(mel_spectrogram, ref=np.max)
         librosa.display.specshow(mel_spectrogram, y_axis='mel', fmax=2 ** 14, x_axis='time')
 
-        plt.savefig(spectrogram_path)
+        plt.savefig(save_path)
         plt.title('Mel Spectrogram')
-        plt.show()
 
-    def process_file(self, file: any):
-        file_name, extension = os.path.splitext(file)
-        file_name = os.path.basename(file_name)
+    def process_tess_files(self):
+        for folder in os.listdir('Tess_Dataset/Audio'):
+            print("starting ", folder)
+            tess_emotion = folder.split('_')[-1].strip().lower()
+            if tess_emotion == 'fear':
+                tess_emotion = 'fearful'
+            if tess_emotion in emotions.values():
+                for file in os.listdir(f'Tess_Dataset/Audio/{folder}'):
+                    save_path = f'Tess_Dataset/Spectrograms/{tess_emotion}/{file[:-4]}.jpg'
 
-        # convert .wav to spectrogram
-        # we only convert files that are starting with 03 - audio only
-        if extension == '.wav' and file_name.split('-')[0] == '03' and file_name + '.jpg' not in os.listdir(
-                f'{root}\\Dataset\\Spectrograms'):
-            self.convert_audio_to_spectrogram(file, file_name)
+                    if f'{file[:-4]}.jpg' not in os.listdir(f'Tess_Dataset/Spectrograms/{tess_emotion}'):
+                        self.convert_audio_to_spectrogram(f'Tess_Dataset/Audio/{folder}/{file}', save_path)
 
-    def process_files(self):
-        for subdir, dir, files in os.walk(f'{root}\\Dataset\\Audio'):
+    def process_ravdess_files(self):
+        for subdir, dir, files in os.walk('Ravdess_Dataset/Spectrograms'):
             for file in files:
-                file_path = os.path.join(subdir, file)
-                self.process_file(file_path)
+                file_name, extension = os.path.splitext(file)
+                file_name = os.path.basename(file_name)
 
+                spectrogram_path = f'Ravdess_Dataset/Spectrograms/{file_name}.jpg'
 
-    def move_files_to_label_folder(self):
+                # convert .wav to spectrogram
+                # we only convert files that are starting with 03 - audio only
+                if extension == '.wav' and file_name.split('-')[0] == '03':
+                    self.convert_audio_to_spectrogram(file, spectrogram_path)
 
-        for subdir, dir, files in os.walk(f'{root}\\Dataset\\Spectrograms'):
+    def process_savee_files_for_testing(self):
+        for subdir, folder, files in os.walk('Savee_Dataset/AudioData/'):
             for file in files:
-                emotion = file.split('-')[2]
-                old_path = f'{root}\\Dataset\\Spectrograms\\{file}'
-                new_path = f'{root}\\Dataset\\Spectrograms\\train\\class_{emotion}\\{file}'
-                print(old_path)
-                print(new_path)
-                os.replace(old_path, new_path)
+                savee_emotion = file[0:1] if len(file) == 7 else file[0:2]
+                emotion = savee_to_ravdess_emotions[savee_emotion]
 
+                save_path = f'Dataset/test/{emotion}/{file[:-4]}.jpg'
+                if f'{file[:-4]}.jpg' not in os.listdir(f'Dataset/test/{emotion}'):
+                    self.convert_audio_to_spectrogram(os.path.join(subdir, file), save_path)
 
-fp = FileProcessor()
-fp.move_files_to_label_folder()
+f = FileProcessor()
+f.process_savee_files_for_testing()

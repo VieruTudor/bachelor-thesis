@@ -1,0 +1,99 @@
+329/329 [==============================] - 329s 978ms/step - loss: 2.1415 - categorical_accuracy: 0.3275
+
+Epoch 00001: loss improved from inf to 1.53232, saving model to best_model.hdf5
+Epoch 2/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.9156 - categorical_accuracy: 0.6748
+
+Epoch 00002: loss improved from 1.53232 to 0.81753, saving model to best_model.hdf5
+Epoch 3/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.6851 - categorical_accuracy: 0.7589
+
+Epoch 00003: loss improved from 0.81753 to 0.62734, saving model to best_model.hdf5
+Epoch 4/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.5072 - categorical_accuracy: 0.8043
+
+Epoch 00004: loss improved from 0.62734 to 0.48037, saving model to best_model.hdf5
+Epoch 5/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.4092 - categorical_accuracy: 0.8519
+
+Epoch 00005: loss improved from 0.48037 to 0.37390, saving model to best_model.hdf5
+Epoch 6/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.3441 - categorical_accuracy: 0.8779
+
+Epoch 00006: loss improved from 0.37390 to 0.30798, saving model to best_model.hdf5
+Epoch 7/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.2452 - categorical_accuracy: 0.9107
+
+Epoch 00007: loss improved from 0.30798 to 0.24218, saving model to best_model.hdf5
+Epoch 8/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.2233 - categorical_accuracy: 0.9176
+
+Epoch 00008: loss improved from 0.24218 to 0.20116, saving model to best_model.hdf5
+Epoch 9/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.1855 - categorical_accuracy: 0.9364
+
+Epoch 00009: loss improved from 0.20116 to 0.16923, saving model to best_model.hdf5
+Epoch 10/25
+329/329 [==============================] - 318s 967ms/step - loss: 0.1653 - categorical_accuracy: 0.9415
+
+Epoch 00010: loss improved from 0.16923 to 0.13898, saving model to best_model.hdf5
+Epoch 11/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.1078 - categorical_accuracy: 0.9639
+
+Epoch 00011: loss improved from 0.13898 to 0.09282, saving model to best_model.hdf5
+Epoch 12/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.0867 - categorical_accuracy: 0.9691
+
+Epoch 00012: loss improved from 0.09282 to 0.08837, saving model to best_model.hdf5
+Epoch 13/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.1305 - categorical_accuracy: 0.9589
+
+Epoch 00013: loss did not improve from 0.08837
+Epoch 14/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.0916 - categorical_accuracy: 0.9704
+
+Epoch 00014: loss improved from 0.08837 to 0.06347, saving model to best_model.hdf5
+Epoch 15/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.0518 - categorical_accuracy: 0.9816
+
+Epoch 00015: loss did not improve from 0.06347
+Epoch 16/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.0977 - categorical_accuracy: 0.9702
+
+Epoch 00016: loss did not improve from 0.06347
+Epoch 17/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.0581 - categorical_accuracy: 0.9819
+
+Epoch 00017: loss did not improve from 0.06347
+Epoch 18/25
+329/329 [==============================] - 318s 965ms/step - loss: 0.0492 - categorical_accuracy: 0.9841
+
+Epoch 00018: loss improved from 0.06347 to 0.03675, saving model to best_model.hdf5
+Epoch 19/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.0350 - categorical_accuracy: 0.9873
+
+Epoch 00019: loss did not improve from 0.03675
+Epoch 20/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.0476 - categorical_accuracy: 0.9824
+
+Epoch 00020: loss did not improve from 0.03675
+Epoch 21/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.1144 - categorical_accuracy: 0.9686
+
+Epoch 00021: loss did not improve from 0.03675
+Epoch 22/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.0102 - categorical_accuracy: 0.9964
+
+Epoch 00022: loss improved from 0.03675 to 0.01299, saving model to best_model.hdf5
+Epoch 23/25
+329/329 [==============================] - 318s 966ms/step - loss: 0.0404 - categorical_accuracy: 0.9880
+
+Epoch 00023: loss did not improve from 0.01299
+Epoch 24/25
+329/329 [==============================] - 318s 967ms/step - loss: 0.1400 - categorical_accuracy: 0.9594
+
+Epoch 00024: loss did not improve from 0.01299
+Epoch 25/25
+329/329 [==============================] - 319s 967ms/step - loss: 0.0312 - categorical_accuracy: 0.9906
+
+Epoch 00025: loss did not improve from 0.01299
