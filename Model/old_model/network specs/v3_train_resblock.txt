@@ -1,0 +1,93 @@
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ rescaling (Rescaling)       (32, 128, 128, 3)         0         
+                                                                 
+ dense (Dense)               (32, 128, 128, 128)       512       
+                                                                 
+ conv2d (Conv2D)             (32, 128, 128, 256)       295168    
+                                                                 
+ batch_normalization (BatchN  (32, 128, 128, 256)      1024      
+ ormalization)                                                   
+                                                                 
+ activation (Activation)     (32, 128, 128, 256)       0         
+                                                                 
+ max_pooling2d (MaxPooling2D  (32, 64, 64, 256)        0         
+ )                                                               
+                                                                 
+ conv2d_1 (Conv2D)           (32, 64, 64, 256)         590080    
+                                                                 
+ batch_normalization_1 (Batc  (32, 64, 64, 256)        1024      
+ hNormalization)                                                 
+                                                                 
+ activation_1 (Activation)   (32, 64, 64, 256)         0         
+                                                                 
+ max_pooling2d_1 (MaxPooling  (32, 16, 16, 256)        0         
+ 2D)                                                             
+                                                                 
+ conv2d_2 (Conv2D)           (32, 16, 16, 256)         590080    
+                                                                 
+ batch_normalization_2 (Batc  (32, 16, 16, 256)        1024      
+ hNormalization)                                                 
+                                                                 
+ activation_2 (Activation)   (32, 16, 16, 256)         0         
+                                                                 
+ max_pooling2d_2 (MaxPooling  (32, 4, 4, 256)          0         
+ 2D)                                                             
+                                                                 
+ conv2d_3 (Conv2D)           (32, 4, 4, 128)           295040    
+                                                                 
+ batch_normalization_3 (Batc  (32, 4, 4, 128)          512       
+ hNormalization)                                                 
+                                                                 
+ activation_3 (Activation)   (32, 4, 4, 128)           0         
+                                                                 
+ max_pooling2d_3 (MaxPooling  (32, 1, 1, 128)          0         
+ 2D)                                                             
+                                                                 
+ res_net_block (ResNetBlock)  (32, 1, 1, 128)          0         
+                                                                 
+ res_net_block_1 (ResNetBloc  (32, 1, 1, 128)          0         
+ k)                                                              
+                                                                 
+ res_net_block_2 (ResNetBloc  (32, 1, 1, 128)          0         
+ k)                                                              
+                                                                 
+ res_net_block_3 (ResNetBloc  (32, 1, 1, 128)          0         
+ k)                                                              
+                                                                 
+ res_net_block_4 (ResNetBloc  (32, 1, 1, 128)          0         
+ k)                                                              
+                                                                 
+ flatten (Flatten)           (32, 128)                 0         
+                                                                 
+ dense_1 (Dense)             (32, 2048)                264192    
+                                                                 
+ dense_2 (Dense)             (32, 8)                   16392     
+                                                                 
+=================================================================
+Total params: 2,055,048
+Trainable params: 2,053,256
+Non-trainable params: 1,792
+_________________________________________________________________
+None
+Epoch 1/5
+165/165 [==============================] - ETA: 0s - loss: 1.4948 - categorical_accuracy: 0.4463
+Epoch 00001: loss improved from inf to 1.49483, saving model to best_model.hdf5
+165/165 [==============================] - 123s 712ms/step - loss: 1.4948 - categorical_accuracy: 0.4463
+Epoch 2/5
+165/165 [==============================] - ETA: 0s - loss: 0.7887 - categorical_accuracy: 0.7098
+Epoch 00002: loss improved from 1.49483 to 0.78874, saving model to best_model.hdf5
+165/165 [==============================] - 117s 705ms/step - loss: 0.7887 - categorical_accuracy: 0.7098
+Epoch 3/5
+165/165 [==============================] - ETA: 0s - loss: 0.6442 - categorical_accuracy: 0.7607
+Epoch 00003: loss improved from 0.78874 to 0.64416, saving model to best_model.hdf5
+165/165 [==============================] - 117s 708ms/step - loss: 0.6442 - categorical_accuracy: 0.7607
+Epoch 4/5
+165/165 [==============================] - ETA: 0s - loss: 0.5284 - categorical_accuracy: 0.8024
+Epoch 00004: loss improved from 0.64416 to 0.52843, saving model to best_model.hdf5
+165/165 [==============================] - 117s 708ms/step - loss: 0.5284 - categorical_accuracy: 0.8024
+Epoch 5/5
+165/165 [==============================] - ETA: 0s - loss: 0.4274 - categorical_accuracy: 0.8418
+Epoch 00005: loss improved from 0.52843 to 0.42744, saving model to best_model.hdf5
+165/165 [==============================] - 118s 710ms/step - loss: 0.4274 - categorical_accuracy: 0.8418

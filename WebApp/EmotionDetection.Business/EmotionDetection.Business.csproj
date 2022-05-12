@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Files\Queries\0fc5gdcx.rfa~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="10.0.1" />
+    <PackageReference Include="MediatR.Contracts" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmotionDetection.Data\EmotionDetection.Data.csproj" />
+    <ProjectReference Include="..\EmotionDetection.DetectionSystem\EmotionDetection.DetectionSystem.csproj" />
+  </ItemGroup>
+
+</Project>
