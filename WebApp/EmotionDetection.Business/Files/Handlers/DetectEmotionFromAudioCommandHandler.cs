@@ -17,9 +17,9 @@ namespace EmotionDetection.Business.Files.Handlers
             _emotionClassifier = emotionClassifier;
         }
 
-        public Task<List<Prediction>> Handle(DetectEmotionFromAudioCommand request, CancellationToken cancellationToken)
+        public async Task<List<Prediction>> Handle(DetectEmotionFromAudioCommand request, CancellationToken cancellationToken)
         {
-            return Task.FromResult(_emotionClassifier.GetPredictionFromAudio(request.FilePath));
+            return await _emotionClassifier.GetPredictionFromAudio(request.FilePath);
         }
     }
 }

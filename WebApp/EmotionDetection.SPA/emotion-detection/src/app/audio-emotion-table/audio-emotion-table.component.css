@@ -1,0 +1,11 @@
+.mat-header-cell{
+  height: auto
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}

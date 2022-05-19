@@ -24,7 +24,7 @@ namespace EmotionDetection.API
         {
             ConfigureSettings(services);
 
-            services.AddTransient<IEmotionClassifier, EmotionClassifier>();
+            services.AddSingleton<IEmotionClassifier, EmotionClassifier>();
             services.AddControllers();
             services.AddMediatR(typeof(DetectEmotionFromAudioCommandHandler));
             services.AddMvc();

@@ -13,6 +13,7 @@ namespace EmotionDetection.API.Requests
     {
         public DetectEmotionFromAudioRequestValidator()
         {
+            ClassLevelCascadeMode = CascadeMode.Stop;
             RuleFor(x => x.AudioFile).NotNull();
             RuleFor(x => x.AudioFile).SetValidator(new FileValidator());
         }

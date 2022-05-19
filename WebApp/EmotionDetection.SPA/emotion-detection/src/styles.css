@@ -1,0 +1,16 @@
+
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+  align-content: center;
+  display: flex;
+}
+body.dark-mode {
+  background-color: #191c1f;
+  color: #dfe6e9;
+}
+
+body.light-mode {
+  background-color: #dfe6e9;
+  color: #2d3436;
+}

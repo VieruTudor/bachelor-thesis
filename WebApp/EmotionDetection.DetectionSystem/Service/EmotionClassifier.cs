@@ -4,68 +4,51 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using EmotionDetection.Data.Entities;
 using EmotionDetection.Data.Enums;
 using EmotionDetection.DetectionSystem.Configuration;
+using EmotionDetection.DetectionSystem.Requests;
+using EmotionDetection.DetectionSystem.Utils;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace EmotionDetection.DetectionSystem.Service
 {
     public class EmotionClassifier : IEmotionClassifier
     {
-        private string _modelPath;
-        private readonly string _pythonPath;
-        private ProcessStartInfo _processStartInfo;
+        private HttpClient _httpClient;
+        private string _serviceBaseUri;
 
         public EmotionClassifier(IOptions<EmotionClassifierSettings> settings)
         {
-            var cwd = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
-
-            _modelPath = cwd + settings.Value.ModelPath;
-            _pythonPath = settings.Value.PythonPath;
-            InitialiseProcessStartInfo();
+            _httpClient = new HttpClient();
+            _serviceBaseUri = settings.Value.BaseApiUri;
         }
 
-        private void InitialiseProcessStartInfo()
+        public async Task<List<Prediction>> GetPredictionFromAudio(string audioPath)
         {
-            _processStartInfo = new ProcessStartInfo()
-            {
-                FileName = _pythonPath,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                // WorkingDirectory = System.IO.Directory.GetParent(_pythonPath).Name,
-                CreateNoWindow = false
-            };
-        }
+            var requestBody = new DetectEmotionFromInferenceModelRequest { AudioPath = audioPath };
+            var detectAudioUri = $"{_serviceBaseUri}/detect-emotion-from-audio";
 
-        public List<Prediction> GetPredictionFromAudio(string audioPath)
-        {
-            _processStartInfo.Arguments = $"{_pythonPath} -u {_modelPath} {audioPath}";
+            var fullRequestBody = JsonConvert.SerializeObject(requestBody);
+            var response = await _httpClient.PostAsJsonAsync(detectAudioUri, fullRequestBody);
 
-            // 0 0.1;1 0.01;2 0.0005
+            var results = Deserializer.GetHttpResponseResult<Dictionary<string, Dictionary<int, float>>>(response);
 
-            var results = string.Empty;
-
-            using (CommandLineProcess cmd = new CommandLineProcess(_pythonPath, $"-u {_modelPath} {audioPath}"))
-            {
-                var sb = new StringBuilder();
-                // Call Python:
-                var exitCode = cmd.Run(out var processOutput, out var processError);
-
-                // Get result:
-                sb.AppendLine(processOutput);
-                sb.AppendLine(processError);
-                results = sb.ToString();
-            }
-
-            var predictions = results.Substring(0, results.LastIndexOf(';')).Split(';')
-                .Select(pred => new Prediction
-                    { Emotion = (Emotion)int.Parse(pred.Split(' ')[0]), Level = float.Parse(pred.Split(' ')[1], CultureInfo.InvariantCulture.NumberFormat) })
+            return results.Result["results"]
+                .Select(kvp =>
+                    new Prediction
+                    {
+                        Emotion = (Emotion)kvp.Key,
+                        Level = kvp.Value
+                    })
                 .ToList();
-            return predictions;
         }
 
         public List<Prediction> GetPredictionFromVideo(string videoPath)
