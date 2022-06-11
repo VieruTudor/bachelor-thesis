@@ -1,6 +1,7 @@
 RAVDESS_PATH = 'Ravdess_Dataset/Audio'
 TESS_PATH = 'Tess_Dataset/Audio'
 SAVEE_PATH = 'Savee_Dataset/AudioData'
+FER_PATH = 'FER_Dataset'
 X_TRAIN_DATA = 'X.joblib'
 Y_TRAIN_DATA = 'Y.joblib'
 
@@ -63,3 +64,12 @@ emotions = {
     6: 'surprised'
 }
 
+fer_to_emotions = {
+    0: 3,
+    1: 5,
+    2: 4,
+    3: 1,
+    4: 2,
+    5: 6,
+    6: 0
+}

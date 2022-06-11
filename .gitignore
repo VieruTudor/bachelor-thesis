@@ -155,6 +155,8 @@ Model/Ravdess_Dataset/
 Model/Savee_Dataset/
 Model/Tess_Dataset/
 Model/Emotional Speech Dataset (ESD)/
+Model/FER_Dataset/
+Model/Video_Tests/
 
 *.swp
 *.*~
